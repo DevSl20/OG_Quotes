@@ -1,9 +1,10 @@
-import React from 'react'
-
-const ListQuote = () => {
+function ListQuotes() {
   return (
-    <div>ListQuote</div>
+  <div>
+    ListQuotes
+  </div>
   )
 }
 
-export default ListQuote
+
+export default ListQuotes;

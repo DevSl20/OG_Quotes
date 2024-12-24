@@ -1,9 +1,9 @@
-import React from 'react'
-
-const SingleQuote = () => {
-  return (
-    <div>SingleQuote</div>
+function SingleQuote() {
+  return( 
+    <div>
+      SingleQuote
+    </div>
   )
 }
 
-export default SingleQuote
+export default SingleQuote;
