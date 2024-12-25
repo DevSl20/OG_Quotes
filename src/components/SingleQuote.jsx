@@ -1,4 +1,5 @@
 import React from "react";
+import { ThumbsUp, ThumbsDown } from "lucide-react";
 import {
   Card,
   CardDescription,
@@ -6,25 +7,29 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
-
-function SingleQuote() {
+function SingleQuote({ quote }) {
   return (
   <Card>
-
   <CardHeader>
-    <CardTitle className="text
-    -lg">OG_Quotes</CardTitle>
-    <CardDescription>OG_Quotes for OG's</CardDescription>
+    <CardTitle className="text-lg">OG_Quotes</CardTitle>
+    <CardDescription>ToTal LiKes:</CardDescription>
   </CardHeader>
 
   <CardFooter className="flex gap-2">
-    <button varient="Outline"></button>
-    <button varient="Outline"></button>
-    <button varient="destructive"></button>
+        <Button variant="outline">
+          <ThumbsUp />
+        </Button>
+        <Button variant="outline">
+          <ThumbsDown />
+        </Button>
+        <Button variant="destructive">
+          Delete
+        </Button>
   </CardFooter>
 </Card>
-  )
+  );
 }
 
 export default SingleQuote;
