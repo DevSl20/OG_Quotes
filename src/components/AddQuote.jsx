@@ -1,14 +1,24 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
-function AddQuote() {
+function AddQuote() { 
+  const [inputValue, setInputvalue] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if(!inputValue) return;
+    console.log(inputValue);
+    setInputvalue("");
+  };
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <Input type="text" placeholder="Add a Quote" className="mb-2" />
+    <form onSubmit={handleSubmit}>
+      <Input onChange={(e) => setInputvalue(e.target.value)} placeholder="Add a quote"/>
 
       <div className="flex gap-2">
-        <Button onClick={() => console.log("Add button")}>Add</Button>
-        <Button onClick={() => console.log("Sort button")}>Sort</Button>
+        <Button>Add</Button>
+        <Button>Sort</Button>
       </div>
     </form>
   );
