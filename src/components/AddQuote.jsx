@@ -2,15 +2,16 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-function AddQuote({ onSubmit }) {
+function AddQuote({ onSubmit, onSort }) {
   const [inputValue, setInputvalue] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if(!inputValue.trim()) return;
+
     onSubmit(inputValue);
-    // console.log(inputValue);
+
     setInputvalue("");
   };
 
@@ -20,13 +21,15 @@ function AddQuote({ onSubmit }) {
         type="text"
         placeholder="Add a Quote"
         className="mb-2"
-        onChange={(e) => setIntputValue(e.target.value)}
+        onChange={(e) => setInputvalue(e.target.value)}
         value={inputValue}
       />
 
       <div className="flex gap-2">
-        <Button>Add</Button>
-        <Button>Sort</Button>
+        <Button type="submit">Add</Button>
+        <Button variant="secondary" onClick={onSort}>
+          Sort
+        </Button>
       </div>
     </form>
   );

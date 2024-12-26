@@ -13,8 +13,8 @@ function SingleQuote({ quote }) {
   return (
   <Card>
   <CardHeader>
-    <CardTitle className="text-lg">OG_Quotes</CardTitle>
-    <CardDescription>ToTal LiKes:</CardDescription>
+    <CardTitle className="text-lg">{quote.title}</CardTitle>
+    <CardDescription>ToTal LiKes:{quote.likes}</CardDescription>
   </CardHeader>
 
   <CardFooter className="flex gap-2">

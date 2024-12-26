@@ -1,10 +1,27 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import AddQuote from "@/components/AddQuote";
 import ListQuote from "@/components/ListQuote";
-import SingleQuote from "@/components/SingleQuote";
 
 function App() {
-  const [quotes, setQuotes] = useState([
+  const quotesReducer = (state, action) => {
+    switch (action.type) {
+      case "add":
+        // Create a new quote
+        const quote = {
+          title: action.payload,
+          id: crypto.randomUUID(),
+          likes: 0,
+        };
+        
+        // Add to new state
+        return [quote, ...state];
+      case "delete":
+      case "like":
+      case "dislike":
+      case "sort":
+    }
+  };
+  const [quotes, dispatch] = useReducer(quotesReducer, [
     {
       id: 1,
       likes: 5,
@@ -18,23 +35,44 @@ function App() {
   ]);
 
   const handleAddQuote = (title) => {
-    // Create a new quote
-    const quote = {
-      title,
-      id: crypto.randomUUID(),
-      likes: 0,
-    };
+    dispatch({ type: "add", payload: title });
+  };
 
-    // Add to new state
-    setQuotes((prevQuotes) => [quote, ...prevQuotes]);
+  const handleDeleteQuote = (id) => {
+    setQuotes((prevQuote) => prevQuote.filter((quote) => quote.id !== id));
+  };
+
+  const handleLikeQuote = (id) => {
+    setQuotes((prevState) => {
+      return prevState.map((quote) =>
+        quote.id === id ? { ...quote, likes: quote.likes + 1 } : quote
+      );
+    });
+  };
+
+  const handleDislikeQuote = (id) => {
+    setQuotes((prevState) => {
+      return prevState.map((quote) =>
+        quote.id === id ? { ...quote, likes: quote.likes - 1 } : quote
+      );
+    });
+  };
+
+  const handleSortQuotes = () => {
+    setQuotes((prevState) => [...prevState].sort((a, b) => b.likes - a.likes));
   };
 
   return (
     <div className="max-w-96 mx-auto p-2">
-      <h1 className="text-3xl text-center font-bold my-5">Quotes</h1>
-      <AddQuote onSubmit={handleAddQuote} />
-      <ListQuote quotes={quotes} />
-      <SingleQuote />
+      <h1 className="text-4xl text-center font-bold my-5">OG_Quotes</h1>
+      <AddQuote onSubmit={handleAddQuote} onSort={handleSortQuotes} />
+      <ListQuote 
+        quotes={quotes} 
+        onDelete={handleDeleteQuote} 
+        onLike={handleLikeQuote}  
+        onDislike={handleDislikeQuote}  
+        onSort={handleSortQuotes}
+      />
     </div>
   );
 }
